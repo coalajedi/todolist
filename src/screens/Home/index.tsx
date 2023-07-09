@@ -11,7 +11,6 @@ import React, {
   FlatList,
   SafeAreaView,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -19,6 +18,7 @@ import {useState} from 'react';
 import {ToDoListItem} from '../../components/ToDoListItem';
 import {ToDo} from '../../models/toDo';
 import {ToDosSummary} from '../../components/ToDosSummary';
+import {Input} from '../../components/Input';
 
 const EmptyListComponent = () => {
   return (
@@ -82,10 +82,7 @@ export function Home() {
           width: '100%',
           flexDirection: 'row',
         }}>
-        <TextInput
-          style={{
-            paddingHorizontal: 16,
-          }}
+        <Input
           placeholder="Adicione uma nova tarefa"
           onChangeText={setToDoDescription}
           value={toDoDescription}
