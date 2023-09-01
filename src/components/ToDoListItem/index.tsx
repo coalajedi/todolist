@@ -6,34 +6,33 @@
  * is strictly prohibited.
  */
 
-import React, {Text, TouchableOpacity, View} from 'react-native';
+import React, {Text, View} from 'react-native';
+import {Button, ButtonType} from '../Button';
+import {Checkbox} from '../Checkbox';
+import {styles} from './style';
 
 type ToDoListItemProps = {
   title: string;
   isDone: boolean;
   onRemove: () => void;
-  onUpdate: () => void;
+  onToggleTodoStatus: (isDone: boolean) => void;
 };
-
-type TextButtonProps = {
-  text: string;
-  onPress: () => void;
-};
-
-function TextButton(props: TextButtonProps) {
-  return (
-    <TouchableOpacity onPress={props.onPress}>
-      <Text>{props.text}</Text>
-    </TouchableOpacity>
-  );
-}
 
 export function ToDoListItem(props: ToDoListItemProps) {
   return (
-    <View>
-      <TextButton text={props.isDone.toString()} onPress={props.onUpdate} />
-      <Text>{props.title}</Text>
-      <TextButton text="Remover" onPress={props.onRemove} />
+    <View style={styles.container}>
+      <Checkbox
+        initialValue={props.isDone}
+        onChange={props.onToggleTodoStatus}
+      />
+      <Text
+        style={[
+          styles.todoDescription,
+          props.isDone ? styles.todoDescriptionDone : null,
+        ]}>
+        {props.title}
+      </Text>
+      <Button type={ButtonType.delete} onPress={props.onRemove} />
     </View>
   );
 }

@@ -35,10 +35,6 @@ export const appTheme = {
       medium: 14,
       large: 16,
     },
-    lineHeight: '140%',
-    weights: {
-      regular: 400,
-      bold: 700,
-    },
+    lineHeight: 1.4,
   },
 };

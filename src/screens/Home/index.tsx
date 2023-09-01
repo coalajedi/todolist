@@ -6,18 +6,12 @@
  * is strictly prohibited.
  */
 
-import React, {
-  Alert,
-  FlatList,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, {Alert, FlatList, SafeAreaView, Text, View} from 'react-native';
 import {useState} from 'react';
 import {ToDoListItem} from '../../components/ToDoListItem';
 import {ToDo} from '../../models/toDo';
 import {ToDosSummary} from '../../components/ToDosSummary';
+import {Button, ButtonType} from '../../components/Button';
 import {Input} from '../../components/Input';
 
 const EmptyListComponent = () => {
@@ -87,9 +81,7 @@ export function Home() {
           onChangeText={setToDoDescription}
           value={toDoDescription}
         />
-        <TouchableOpacity onPress={handleAddToDo}>
-          <Text>Adicionar</Text>
-        </TouchableOpacity>
+        <Button type={ButtonType.create} onPress={handleAddToDo} />
       </View>
 
       <FlatList
@@ -100,7 +92,9 @@ export function Home() {
             isDone={item.isDone}
             title={item.description}
             onRemove={() => handleRemoveToDo(item)}
-            onUpdate={() => handleUpdateToDo(item, {isDone: !item.isDone})}
+            onToggleTodoStatus={isDone =>
+              handleUpdateToDo(item, {isDone: isDone})
+            }
           />
         )}
         showsVerticalScrollIndicator={false}
