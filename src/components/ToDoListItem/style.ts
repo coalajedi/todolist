@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     minHeight: 64,
+    marginBottom: 8,
   },
   todoDescription: {
     flex: 2,

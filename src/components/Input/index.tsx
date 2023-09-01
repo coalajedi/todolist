@@ -9,6 +9,7 @@
 import React, {TextInput} from 'react-native';
 import {styles} from './style';
 import {appTheme} from '../../theme/app-theme';
+import {useState} from 'react';
 
 type InputProps = {
   placeholder: string;
@@ -17,15 +18,19 @@ type InputProps = {
 };
 
 export function Input(props: InputProps) {
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   return (
     <TextInput
-      style={styles.textInput}
+      style={styles({isFocused}).textInput}
       placeholder={props.placeholder}
       placeholderTextColor={appTheme.colors.base.gray300}
       cursorColor={appTheme.colors.base.gray100}
       selectionColor={appTheme.colors.base.gray100}
       value={props.value}
       onChangeText={props.onChangeText}
+      clearButtonMode={'always'}
+      onFocus={() => setIsFocused(true)}
+      onEndEditing={() => setIsFocused(false)}
     />
   );
 }

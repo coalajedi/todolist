@@ -9,12 +9,24 @@
 import {StyleSheet} from 'react-native';
 import {appTheme} from '../../theme/app-theme';
 
-export const styles = StyleSheet.create({
-  textInput: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: appTheme.colors.base.gray500,
-    borderRadius: 8,
-    color: appTheme.colors.base.gray100,
-  },
-});
+type StylesProps = {
+  isFocused: boolean;
+};
+
+export function styles(props: StylesProps) {
+  return StyleSheet.create({
+    textInput: {
+      flex: 1,
+      minHeight: 52,
+      borderStyle: 'solid',
+      borderWidth: 1,
+      borderColor: props.isFocused
+        ? appTheme.colors.product.purple
+        : appTheme.colors.base.gray500,
+      padding: 16,
+      backgroundColor: appTheme.colors.base.gray500,
+      borderRadius: 8,
+      color: appTheme.colors.base.gray100,
+    },
+  });
+}

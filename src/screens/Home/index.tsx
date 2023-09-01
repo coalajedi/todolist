@@ -7,12 +7,14 @@
  */
 
 import React, {Alert, FlatList, SafeAreaView, Text, View} from 'react-native';
-import {useState} from 'react';
+import {Fragment, useState} from 'react';
 import {ToDoListItem} from '../../components/ToDoListItem';
 import {ToDo} from '../../models/toDo';
-import {ToDosSummary} from '../../components/ToDosSummary';
 import {Button, ButtonType} from '../../components/Button';
 import {Input} from '../../components/Input';
+import {ToDosSummary} from '../../components/ToDosSummary';
+import {AppLogo} from '../../components/AppLogo';
+import {styles} from './style';
 
 const EmptyListComponent = () => {
   return (
@@ -31,6 +33,16 @@ export function Home() {
     if (!toDoDescription) {
       return;
     }
+
+    const toDoExist = toDoList.find(
+      value => value.description === toDoDescription,
+    );
+
+    if (toDoExist) {
+      Alert.alert('ToDo já existe!');
+      return;
+    }
+
     const toDo: ToDo = {
       _id: toDoList.length,
       description: toDoDescription,
@@ -68,38 +80,42 @@ export function Home() {
   }
 
   return (
-    <SafeAreaView>
-      <Text>🚀ToDo</Text>
-      <ToDosSummary toDoList={toDoList} />
-      <View
-        style={{
-          width: '100%',
-          flexDirection: 'row',
-        }}>
-        <Input
-          placeholder="Adicione uma nova tarefa"
-          onChangeText={setToDoDescription}
-          value={toDoDescription}
-        />
-        <Button type={ButtonType.create} onPress={handleAddToDo} />
-      </View>
-
-      <FlatList
-        data={toDoList}
-        keyExtractor={(_, index) => index.toString()}
-        renderItem={({item}) => (
-          <ToDoListItem
-            isDone={item.isDone}
-            title={item.description}
-            onRemove={() => handleRemoveToDo(item)}
-            onToggleTodoStatus={isDone =>
-              handleUpdateToDo(item, {isDone: isDone})
-            }
+    <Fragment>
+      <SafeAreaView style={styles.safeAreaTop} />
+      <SafeAreaView style={styles.safeAreaBottom}>
+        <View style={styles.header}>
+          <View style={styles.appLogo}>
+            <AppLogo />
+          </View>
+        </View>
+        <View style={styles.body}>
+          <View style={styles.form}>
+            <Input
+              placeholder="Adicione uma nova tarefa"
+              onChangeText={setToDoDescription}
+              value={toDoDescription}
+            />
+            <Button type={ButtonType.create} onPress={handleAddToDo} />
+          </View>
+          <ToDosSummary toDoList={toDoList} />
+          <FlatList
+            data={toDoList}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({item}) => (
+              <ToDoListItem
+                isDone={item.isDone}
+                title={item.description}
+                onRemove={() => handleRemoveToDo(item)}
+                onToggleTodoStatus={isDone =>
+                  handleUpdateToDo(item, {isDone: isDone})
+                }
+              />
+            )}
+            showsVerticalScrollIndicator={false}
+            ListEmptyComponent={EmptyListComponent}
           />
-        )}
-        showsVerticalScrollIndicator={false}
-        ListEmptyComponent={EmptyListComponent}
-      />
-    </SafeAreaView>
+        </View>
+      </SafeAreaView>
+    </Fragment>
   );
 }

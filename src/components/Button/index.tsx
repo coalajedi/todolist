@@ -6,7 +6,7 @@
  * is strictly prohibited.
  */
 
-import React, {TouchableHighlight, TouchableOpacity, View} from 'react-native';
+import React, {TouchableOpacity, View} from 'react-native';
 import {styles} from './style';
 import {useState} from 'react';
 import {appTheme} from '../../theme/app-theme';
@@ -80,18 +80,17 @@ function CreateButton(props: BaseButtonProps) {
     plusIconColor: iconColor,
   });
   return (
-    <TouchableHighlight
+    <TouchableOpacity
       style={buttonStyle.createButton}
       onPress={props.onPress}
       activeOpacity={1}
-      underlayColor={appTheme.colors.base.gray100}
       onPressIn={() => setIconColor(appTheme.colors.product.blue)}
       onPressOut={() => setIconColor(appTheme.colors.product.blueDark)}>
       <View style={buttonStyle.plusIcon}>
         <View style={buttonStyle.plusIconXAxis} />
         <View style={buttonStyle.plusIconYAxis} />
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }
 
