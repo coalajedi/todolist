@@ -6,7 +6,14 @@
  * is strictly prohibited.
  */
 
-import React, {Alert, FlatList, SafeAreaView, Text, View} from 'react-native';
+import React, {
+  Alert,
+  FlatList,
+  Image,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
 import {Fragment, useState} from 'react';
 import {ToDoListItem} from '../../components/ToDoListItem';
 import {ToDo} from '../../models/toDo';
@@ -18,10 +25,18 @@ import {styles} from './style';
 
 const EmptyListComponent = () => {
   return (
-    <Text>
-      Você ainda não tem tarefas cadastradas Crie tarefas e organize seus itens
-      a fazer
-    </Text>
+    <View style={styles.emptyList}>
+      <Image
+        source={require('../../../assets/images/clipboard.png')}
+        style={styles.clipboardIcon}
+      />
+      <Text style={styles.emptyListText1}>
+        Você ainda não tem tarefas cadastradas
+      </Text>
+      <Text style={styles.emptyListText2}>
+        Crie tarefas e organize seus itens a fazer
+      </Text>
+    </View>
   );
 };
 

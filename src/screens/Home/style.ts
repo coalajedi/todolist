@@ -41,4 +41,39 @@ export const styles = StyleSheet.create({
     position: 'relative',
     top: -26 - 16, // Half height + body padding
   },
+  emptyList: {
+    borderTopWidth: 1,
+    borderTopColor: appTheme.colors.base.gray400,
+    padding: 16,
+
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    alignSelf: 'stretch',
+  },
+  clipboardIcon: {
+    width: 56,
+    height: 56,
+
+    marginBottom: 16,
+  },
+  emptyListText1: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: appTheme.typography.sizes.medium,
+    fontFamily: appTheme.typography.fontFamily,
+    lineHeight:
+      appTheme.typography.sizes.medium * appTheme.typography.lineHeight,
+
+    color: appTheme.colors.base.gray300,
+  },
+  emptyListText2: {
+    textAlign: 'center',
+    fontSize: appTheme.typography.sizes.medium,
+    fontFamily: appTheme.typography.fontFamily,
+    lineHeight:
+      appTheme.typography.sizes.medium * appTheme.typography.lineHeight,
+
+    color: appTheme.colors.base.gray300,
+  },
 });
